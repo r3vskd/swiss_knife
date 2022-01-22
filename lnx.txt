@@ -1,0 +1,238 @@
+#include <iostream>
+#include<stdlib.h>
+#include <string>
+#include <unistd.h>
+using namespace std;
+
+void creararchivos(){
+    cout<<endl<<"==========================="<<endl;
+    cout<<"\tCREANDO 5 ARCHIVOS..."<<endl;
+    cout<<"==========================="<<endl;
+    sleep(2);
+	system("> archivoA.txt");
+	system("> archivoB.txt");
+	system("> archivoC.txt");
+	system("> archivoD.txt");
+	system("> archivoE.txt");
+        cout<<endl<<"==========================="<<endl;
+        cout<<"\tCREANDO 2 DIRECTORIOS..."<<endl;
+        cout<<"==========================="<<endl;
+        sleep(2);
+	system("mkdir D1");
+	system("mkdir D2");
+        cout<<endl<<"==========================="<<endl;
+        cout<<"\tCOPIANDO ARCHIVOS A DIRECTORIO 1..."<<endl;
+        cout<<"==========================="<<endl;
+        sleep(2);
+	system("cp archivoA.txt D1");
+	system("cp archivoB.txt D1");
+	system("cp archivoC.txt D1");
+	system("cp archivoD.txt D1");
+	system("cp archivoE.txt D1");
+        cout<<endl<<"==========================="<<endl;
+        cout<<"\tCOPIANDO ARCHIVOS A DIRECTORIO 2..."<<endl;
+        cout<<"==========================="<<endl;
+        sleep(2);
+	system("cp archivoA.txt D2");
+	system("cp archivoB.txt D2");
+	system("cp archivoC.txt D2");
+	system("cp archivoD.txt D2");
+	system("cp archivoE.txt D2");
+        cout<<endl<<"==========================="<<endl;
+        cout<<"\tRELLENANDO ARCHIVOS CON TEXTO RANDOM..."<<endl;
+        cout<<"==========================="<<endl;
+        sleep(2);
+	system("echo 'el Bebe una Bebi dentro del Banco con Beto y belinda' > D1/archivoA.txt");
+	system("echo 'la vaca nos da leche para comer con pan y Beber con chocolate' > D1/archivoB.txt");
+	system("echo 'maria come su helado en la feria' > D1/archivoC.txt");
+	system("echo 'emilio Bebe leche con melon en la puerta del balcon' > D1/archivoD.txt");
+	system("echo 'juanito sale a pasear con un balon' > D1/archivoE.txt");
+	system("echo 'luego de ver la llamada solo se asusto' > D2/archivoA.txt");
+	system("echo 'piensa bien si quieres estudiar una ingenieria' > D2/archivoB.txt");
+	system("echo 'estar en sistemas de hace reflfexionar sobre muchas cosas' > D2/archivoC.txt");
+	system("echo 'nunca habia pensado eso pero lo vi y me va bien' > D2/archivoD.txt");
+	system("echo 'debo decirte lo que siento sino sera tarde cuando te lo diga deja lo bonita que lo eres demasiado eres inteligente' > D2/archivoE.txt");
+}
+
+void buscar(){
+        cout<<endl<<"================================="<<endl;
+	cout<<"ARCHIVO MAS GRANDE DEL DIRECTORIO D2:"<<endl;
+	system("find D2/ -type f -printf '%s %p\n' | sort -nr | head -1");
+        cout<<"================================="<<endl;
+        sleep(2);
+        cout<<endl<<"================================="<<endl;
+	cout<<"ARCHIVO MAS CHICO DEL DIRECTORIO D2:"<<endl;
+	system("find D1/ -type f -printf '%s %p\n' | sort -n | head -1");
+        cout<<"================================="<<endl;
+}
+
+void copiar(){
+    cout<<"****COPIANDO CONTENIDO DE ARCHIVO A EN B****"<<endl;
+    sleep(2);
+	system("cat D1/archivoA.txt >> D1/archivoB.txt");	
+}
+
+void buscar_2(){
+        cout<<endl<<"================================="<<endl;
+	cout<<"ARCHIVO MAS ACTUAL DEL DIRECTORIO D1:"<<endl;
+	system("find D1/ $i -type f -printf '%TY-%Tm-%Td %TT %p\n' | sort -r | head -n1");
+        cout<<"================================="<<endl;
+        sleep(2);
+        cout<<endl<<"================================="<<endl;
+	cout<<"ARCHIVO MAS ANTIGUO DEL DIRECTORIO D2:"<<endl;
+	system("find D2/ -type f -printf '%T+ %p\n' | sort | head -n 1");
+        cout<<"================================="<<endl;
+        sleep(2);
+}
+
+void contar(){
+        cout<<endl<<"-----------------------------------------"<<endl;
+	cout<<("CANTIDAD DE LETRAS B EN EL ARCHIVO A: ")<<endl;
+	system("grep -o 'B' D1/archivoA.txt | wc -l");
+        cout<<"-----------------------------------------"<<endl;
+        sleep(2);
+        cout<<endl<<"-----------------------------------------"<<endl;
+	cout<<("CANTIDAD DE LETRAS b EN EL ARCHIVO A: ")<<endl;
+	system("grep -o 'b' D1/archivoA.txt | wc -l");
+        cout<<"-----------------------------------------"<<endl;
+}
+
+void cambiar(){
+        cout<<"****CAMBIANDO LOS PERMISO DEL ARCHIVO B A SOLO EJECUCION****"<<endl;
+        sleep(2);
+	system("chmod +x -c D1/archivoB.txt");
+	system("chmod -r -c D1/archivoB.txt");
+	system("chmod -w -c D1/archivoB.txt");
+}
+
+void cambiar_2(){
+        cout<<"****CAMBIANDO ARCHIVO A DE D2 DE PROPIETARIO****"<<endl;
+        sleep(2);
+	system("chown rogerdiego D2/archivoA.txt");
+	system("ls -l cd D2");
+}
+
+void cambiar_3()
+{
+	cout<<"****CAMBIANDO ARCHIVO B DE GRUPO****"<<endl;
+        sleep(2);
+        system("chgrp -v lobos D1/archivoB.txt");
+	system("ls -l cd D1");
+}
+
+void crear(){
+	cout<<"**EJECUTANDO SCRIPT PARA CAMBIAR DE NOMBRE**"<<endl;
+        sleep(2);
+	system("mv D1/archivoC.txt D1/nuevoC.txt");
+	system("ls -l cd D1");
+}
+void encript(){
+	cout<<"**ENCRIPTANDO ARCHIVO B**"<<endl;
+        sleep(2);
+	system("gpg -c D2/archivoB.txt");
+	cout<<"**DESENCRIPTANDO ARCHIVO B**"<<endl;
+        sleep(2);
+	system("gpg D2/archivoB.gpg");
+	system("rm D2/archivoB.txt");
+	system("ls -l cd D2");
+}
+int Menu(){
+    int a=0;
+    char s[50]="";
+    cout<<"======================================================"<<endl;
+    cout<<"\tPROGRAMA SIMULADOR, COMANDOS LINUX...."<<endl;
+		cout<<"1.- Crear 5 archivos, 2 directorios y copiarlos dentro"<<endl;
+		cout<<"2.-Archivo mas grande de D2 y mas chico de D1"<<endl;
+		cout<<"3.-El mas actual de D1 y el mas antiguo de D2"<<endl;
+		cout<<"4.-Copiar contenido de A en B"<<endl;
+		cout<<"5.-Numero de letras B o b en D1"<<endl;
+		cout<<"6.-Cambiar los permisos del archivo B a solo ejecucion"<<endl;
+		cout<<"7.-Cambiar el archivo A de D2 de propietario"<<endl;
+		cout<<"8.-Cambiar al archivo B de grupo"<<endl;
+		cout<<"9.-Crear script para cambiar el nombre a un archivo en D2"<<endl;
+		cout<<"10.-Encriptar y desemcriptar 1 archivo"<<endl;		
+		cout<<"11.- Salir"<<endl;
+    cout<<"======================================================"<<endl;
+		cout<<"ESCOGE UNA OPCION... "<<endl<<">"; cin.getline(s,50); a=atoi(s);
+                return a;
+}
+void Prog_princ(){
+	int opcion=0;
+	system("clear");
+	cout<<endl;
+	do{
+            opcion=Menu();
+		switch(opcion){
+			case 1:
+				cout<<endl<<"================================="<<endl;
+                                cout<<"\tEJECUTANDO METODO.crearchivos();"<<endl;
+                                cout<<"================================="<<endl<<endl;
+                                creararchivos(); 
+				break;
+			case 2:
+                                cout<<endl<<"================================="<<endl;
+                                cout<<"\tEJECUTANDO METODO.buscar();"<<endl;
+                                cout<<"================================="<<endl<<endl;
+				buscar();
+				break;
+			case 3:
+                                cout<<endl<<"================================="<<endl;
+                                cout<<"\tEJECUTANDO METODO.buscar2();"<<endl;
+                                cout<<"================================="<<endl<<endl;
+				buscar_2();
+				break;
+			case 4:
+                                cout<<endl<<"================================="<<endl;
+                                cout<<"\tEJECUTANDO METODO.copiar();"<<endl;
+                                cout<<"================================="<<endl<<endl;
+				copiar();
+				break;
+			case 5:
+                                cout<<endl<<"================================="<<endl;
+                                cout<<"\tEJECUTANDO METODO.contar();"<<endl;
+                                cout<<"================================="<<endl<<endl;
+				contar();
+				break;
+			case 6:
+                                cout<<endl<<"================================="<<endl;
+                                cout<<"\tEJECUTANDO METODO.cambiar();"<<endl;
+                                cout<<"================================="<<endl<<endl;
+				cambiar();
+				break;
+			case 7:
+				cout<<endl<<"================================="<<endl;
+                                cout<<"\tEJECUTANDO METODO.cambiar2();"<<endl;
+                                cout<<"================================="<<endl<<endl;
+                                cambiar_2();
+				break;
+			case 8:
+                                cout<<endl<<"================================="<<endl;
+                                cout<<"\tEJECUTANDO METODO.cambiar3();"<<endl;
+                                cout<<"================================="<<endl<<endl;
+				cambiar_3();
+				break;
+			case 9:
+                                cout<<endl<<"================================="<<endl;
+                                cout<<"\tEJECUTANDO METODO.crear();"<<endl;
+                                cout<<"================================="<<endl<<endl;
+				crear();
+				break;
+			case 10:
+                                cout<<endl<<"================================="<<endl;
+                                cout<<"\tEJECUTANDO METODO.encript();"<<endl;
+                                cout<<"================================="<<endl<<endl;
+				encript();
+				break;
+			case 11:
+                            cout<<"SALIENDO..."<<endl;
+				break;
+			default:
+				cout<<"OPCION NO DISPONIBLE, INGRESE UNA OPCION VALIDA..."<<endl;
+				break;
+		}
+	}while(opcion!=11);	
+}
+int main(){
+	Prog_princ();
+	return 0;
+}
