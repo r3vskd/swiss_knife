@@ -135,7 +135,7 @@ def option12():
 
 if __name__=='__main__':    
     while(True):            
-        print('\x1b[33;92m' '  ﮾ menu ﮾  ''\x1b[0m') # Estilo que le di para que sira como separador y le de estetica '\x1b[0m' eso solo le da color
+        print('\x1b[33;92m' '  ﮾ menu ﮾  ''\x1b[0m') 
         print("\t")     
         print_menu()    
         option = ''      los datos con ''
